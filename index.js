@@ -60,16 +60,17 @@ const burger = {
   name: "Burger",
   price: 18,
   category: "Lunch",
+  discount: function (clientType) {
+    console.log(burger);
+    if (clientType === "teacher" || clientType === "student") {
+      burger.price = 18 - 18 * (25 / 100);
+    } else {
+      burger.price = 18 - 18 * (10 / 100);
+    }
+    return burger.price;
+  },
 };
-function discount(clientType) {
-  if (clientType === "teacher" || clientType === "student") {
-    burger.price = 13.5;
-  } else {
-    burger.price = 16.2;
-  }
-  return burger.price;
-}
-console.log("task 2", discount("student"));
+console.log(burger.discount("teacher"));
 
 //function to enter client type  (pass paramaters(client))
 // conditional statement to apply discount type
@@ -119,13 +120,28 @@ const reviews = [
 Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
+for (let i = 0; i < reviews.length; i++) {
+  if (reviews[i].name === "Julius") {
+    console.log(reviews[i]);
+  }
+}
+
+//loop through the array to get the wanted feedback
+// use conditional statement to filter through each element
+//console.log the results
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4 (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Reyna's feedback is missing! Use what you know to do the following: (no function needed) 
   1. Add this feedback to Reyna's rating - "this place is chill with really cool people, great for getting work done on weekdays"
   2. log the reviews array to the console to check your work
 */
-
+for (let i = 0; i < reviews.length; i++) {
+  if (reviews[i].name === "Reyna") {
+    reviews[i].feedback =
+      "this place is chill with really cool people, great for getting work done on weekdays";
+  }
+}
+console.log(reviews);
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function that creates an object with name, rating, feedback, add the new review to the end of an array and returns the resulting array
  the addReview function below to do the following:
@@ -135,9 +151,19 @@ Write a function that creates an object with name, rating, feedback, add the new
   4. should return the resulting array
 */
 
-function addReview(/*Your Code Here */) {
-  /*Your Code Here */
+function addReview(array, name1, rating1, review1) {
+  array.push({ name: name1, rating: rating1, feedback: review1 });
+  return array;
 }
+console.log(
+  "task 5",
+  addReview(
+    reviews,
+    "Daniela",
+    5,
+    "Beautiful atmosphere and wonderful vegan options!"
+  )
+);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function to return a review based on the index of the review in the array.
@@ -146,12 +172,14 @@ Use the getReviewByIndex function below to do the following:
   1. Receive an array as an argument from the first parameter
   2. Receive a number which is the desired index in the array as an argument from the second parameter
   3. The function should return the following string: "{name} gave the restaurant a {rating} star review, and their feedback was: {feedback}"
-  For example: getReviewByIndex(reviews,0) would return: "Daniela gave the restaurant a 5 star review, and their feedback was: Beautiful atmosphere and wonderful vegan options!"
+  For example: getReviewByIndex(reviews,0) would return: "Daniela gave the restaurant a 5 star review, and their feedback was: Beautiful atmosphere
+   and wonderful vegan options!"
 */
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(array, index) {
+  return `${array[index].name} gave the restaurant a ${array[index].rating} star review, and their feedback was: ${array[index].feedback}`;
 }
+console.log(getReviewByIndex(reviews, 0));
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Write a function to get information about the most recent (last) review called `getLastReview`
@@ -165,10 +193,11 @@ Use the getLastReview function below to do the following:
   NOTE: her feedback should not be blank if task 4 was done correctly
 */
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(array) {
+  const newarr = array[array.length - 1];
+  return `${newarr.name} gave the restaurant a ${newarr.rating} star review, and their feedback was: ${newarr.feedback}`;
 }
-
+console.log(getLastReview(reviews));
 ///////////////🍔☕️🍽 STRETCH🍔☕️🍽////////////////////
 
 /** 💪💪💪💪💪💪💪💪💪💪 STRETCH 1: 💪💪💪💪💪💪💪💪💪💪 
